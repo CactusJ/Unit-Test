@@ -1,82 +1,40 @@
 #include "Store.h"
 #include <Windows.h>
 
-namespace classic
+
+Store::Store()
 {
-    Store::Store()
-    {
-        shelf.insert({ Product::Shampoo, 0 });
-    }
-
-    unsigned int Store::GetProductCount(Product product) const
-    {
-        return shelf.at(product);
-    }
-
-    void Store::AddProduct(Product product, unsigned int count)
-    {
-        shelf[product] += count;
-    }
-
-    bool Store::Purchase(Product product, unsigned int count)
-    {
-        if (!HasEnoughProduct_(product, count))
-        {
-            return false;
-        }
-        shelf[product] -= count;
-
-        return true;
-    }
-
-    bool Store::HasEnoughProduct_(Product product, unsigned int count)
-    {
-        unsigned int productCountInStore{ shelf[product] };
-        if (count <= productCountInStore)
-        {
-            return true;
-        }
-
-        return false;
-    }
+    shelf.insert({ Product::Shampoo, 0 });
 }
 
-namespace london
+unsigned int Store::GetProductCount(Product product) const
 {
-    Store::Store()
+    return shelf.at(product);
+}
+
+void Store::AddProduct(Product product, unsigned int count)
+{
+    shelf[product] += count;
+}
+
+bool Store::Purchase(Product product, unsigned int count)
+{
+    if (!HasEnoughProduct_(product, count))
     {
-        shelf.insert({ Product::Shampoo, 0 });
+        return false;
     }
+    shelf[product] -= count;
 
-    unsigned int Store::GetProductCount(Product product) const
+    return true;
+}
+
+bool Store::HasEnoughProduct_(Product product, unsigned int count)
+{
+    unsigned int productCountInStore{ shelf[product] };
+    if (count <= productCountInStore)
     {
-        return shelf.at(product);
-    }
-
-    void Store::AddProduct(Product product, unsigned int count)
-    {
-        shelf[product] += count;
-    }
-
-    bool Store::Purchase(Product product, unsigned int count)
-    {
-        if (!HasEnoughProduct_(product, count))
-        {
-            return false;
-        }
-        shelf[product] -= count;
-
         return true;
     }
 
-    bool Store::HasEnoughProduct_(Product product, unsigned int count)
-    {
-        unsigned int productCountInStore{ shelf[product] };
-        if (count <= productCountInStore)
-        {
-            return true;
-        }
-
-        return false;
-    }
+    return false;
 }

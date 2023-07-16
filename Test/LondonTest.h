@@ -9,7 +9,7 @@ namespace london
     TEST(PurchaseLondon, SucceedsWhenEnoughInventory)
     {
         // 준비
-        FakeStore store;
+        MockStore store;
         EXPECT_CALL(store, Purchase).WillOnce(testing::Return(true));
 
         Customer sut;
@@ -25,14 +25,14 @@ namespace london
     TEST(PurchaseLondon, FailsWhenNotEnoughInventory)
     {
         // 준비
-        FakeStore store;
+        MockStore store;
         EXPECT_CALL(store, Purchase).WillOnce(testing::Return(false));
-
+    
         Customer sut;
-
+    
         // 실행
         bool isSuccess{ sut.Purchase(store, Product::Shampoo, 10) };
-
+    
         // 검증
         EXPECT_FALSE(isSuccess);
         EXPECT_EQ(0, sut.GetInventory(Product::Shampoo));

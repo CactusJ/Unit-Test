@@ -1,54 +1,25 @@
 #include "Customer.h"
 #include <system_error>
 
-namespace classic
+bool Customer::Purchase(Store& store, const Product product, unsigned int count)
 {
-    bool Customer::Purchase(Store& store, const Product product, unsigned int count)
+    if (!store.Purchase(product, count))
     {
-        if (!store.Purchase(product, count))
-        {
-            return false;
-        }
+        return false;
+    }
 
-        inventory_[product] += count;
-        return true;
-    }
-    
-    unsigned int Customer::GetInventory(const Product product) const
-    {
-        try
-        {
-            return inventory_.at(product);
-        }
-        catch (std::out_of_range)
-        {
-            return 0;
-        }
-    }
+    inventory_[product] += count;
+    return true;
 }
 
-namespace london
+unsigned int Customer::GetInventory(const Product product) const
 {
-    bool Customer::Purchase(IStore& store, const Product product, unsigned int count)
+    try
     {
-        if (!store.Purchase(product, count))
-        {
-            return false;
-        }
-        
-        inventory_[product] += count;
-        return true;
+        return inventory_.at(product);
     }
-
-    unsigned int Customer::GetInventory(const Product product) const
+    catch (std::out_of_range)
     {
-        try
-        {
-            return inventory_.at(product);
-        }
-        catch (std::out_of_range)
-        {
-            return 0;
-        }
+        return 0;
     }
 }
