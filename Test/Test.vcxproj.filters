@@ -9,11 +9,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ClassicTest.cpp">
+    <ClCompile Include="ClassicTest.h">
       <Filter>Store</Filter>
     </ClCompile>
-    <ClCompile Include="LondonTest.cpp">
+    <ClCompile Include="LondonTest.h">
       <Filter>Store</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MockStore.h">
+      <Filter>Store</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
